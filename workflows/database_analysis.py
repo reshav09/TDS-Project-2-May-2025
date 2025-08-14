@@ -130,12 +130,12 @@ class DatabaseAnalysisWorkflow(BaseWorkflow):
             logger.info(f"Executing generated code (Attempt {attempt + 1}/{max_retries + 1})")
             
             # The generated code should now be self-contained and not need file path replacement
-            with open("temp_generated_code.py", "w", encoding="utf-8") as f:
+            with open("temp_database_generated_code.py", "w", encoding="utf-8") as f:
                 f.write(current_code)
             
             try:
                 result = subprocess.run(
-                    ["python", "-W", "ignore", "temp_generated_code.py"], # Added -W ignore to suppress warnings
+                    ["python", "-W", "ignore", "temp_database_generated_code.py"], # Added -W ignore to suppress warnings
                     capture_output=True, text=True, timeout=300, check=True
                 )
                 logger.info("Code executed successfully.")
