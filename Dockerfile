@@ -5,6 +5,28 @@ FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# ❗ FIX: Install system dependencies for Playwright manually
+# This includes graphics libraries, fonts, and other essentials for running a headless browser.
+RUN apt-get update && apt-get install -y \
+    libnss3 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libxkbcommon0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libpango-1.0-0 \
+    libcairo2 \
+    libasound2 \
+    fonts-unifont \
+    fonts-liberation \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
 # Set the working directory inside the container
 WORKDIR /app
 
@@ -14,12 +36,13 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Playwright browsers and their system dependencies
-RUN playwright install --with-deps chromium
+# ❗ FIX: Install only the browser, without the automatic dependency flag,
+# as we have already installed them manually.
+RUN playwright install chromium
 
 # Copy the rest of your application code into the container
 COPY . .
 
-# Command to run the Uvicorn server
-# This will listen on all interfaces (0.0.0.0) and use the port provided by Railway ($PORT)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Command to run the Uvicorn server on Render
+# Render provides the $PORT variable automatically.
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "10000"]
