@@ -191,7 +191,6 @@ class CodeGeneratingAnswerStep:
             # The generated code is expected to produce a 'final_answer' variable
             if 'final_answer' in local_scope:
                 result = local_scope['final_answer']
-                logger.info(f"Code executed successfully. Result: {result}")
                 return sanitize_for_json(result)
             else:
                 raise ValueError("The generated code did not produce a 'final_answer' variable.")

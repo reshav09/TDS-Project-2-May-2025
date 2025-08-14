@@ -2,7 +2,7 @@ import requests
 import os
 
 # Base URL for the API
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = "https://tds-project-2-may-2025.onrender.com/api/"
 
 def test_health_check():
     """Tests the health check endpoint."""
