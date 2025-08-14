@@ -25,8 +25,6 @@ It includes a self-healing mechanism to debug and retry failed code executions, 
 
 ## 📂 Project Structure
 
-```
-
 root/
 ├── app/
 │   ├── **init**.py
@@ -52,7 +50,7 @@ root/
 ├── requirements.txt         # Python dependencies
 └── README.md
 
-````
+```
 
 ---
 
