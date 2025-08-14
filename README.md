@@ -27,24 +27,24 @@ It includes a self-healing mechanism to debug and retry failed code executions, 
 
 root/
 ├── app/
-│   ├── **init**.py
+│   ├── __init__.py
 │   ├── main.py              # FastAPI app entry point
 │   └── api.py               # Core API logic
 ├── core/
-│   ├── **init**.py
+│   ├── __init__.py
 │   ├── base.py              # Workflow base classes
 │   └── config.py            # Config & LLM setup
 ├── workflows/
-│   ├── **init**.py
-│   ├── web\_scraping.py      # Web scraping workflow
-│   └── database\_analysis.py # Database workflow
+│   ├── __init__.py
+│   ├── web_scraping.py      # Web scraping workflow
+│   └── database_analysis.py # Database workflow
 ├── utils/
-│   ├── **init**.py
+│   ├── __init__.py
 │   ├── constants.py         # Project constants
-│   ├── duckdb\_utils.py      # DuckDB helpers
+│   ├── duckdb_utils.py      # DuckDB helpers
 │   └── prompts.py           # LLM prompts
 ├── tests/
-│   └── test\_api.py          # API tests
+│   └── test_api.py          # API tests
 ├── .env.example             # Example env vars
 ├── .gitignore
 ├── requirements.txt         # Python dependencies
