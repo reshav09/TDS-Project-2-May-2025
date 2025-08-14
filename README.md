@@ -1,4 +1,8 @@
-# Intelligent Data Analysis Platform
+
+---
+
+```md
+# 🧠 Intelligent Data Analysis Platform
 
 An advanced, **AI-driven** platform for automated data analysis.  
 It features a modular architecture that intelligently processes user queries for both **web-based data scraping** and **complex database analysis**.
@@ -21,38 +25,38 @@ It includes a self-healing mechanism to debug and retry failed code executions, 
 
 ## 📂 Project Structure
 
-reshavs project/
+```
+
+root/
 ├── app/
-│ ├── init.py
-│ ├── main.py # FastAPI app entry point
-│ └── api.py # Core API logic
+│   ├── **init**.py
+│   ├── main.py              # FastAPI app entry point
+│   └── api.py               # Core API logic
 ├── core/
-│ ├── init.py
-│ ├── base.py # Workflow base classes
-│ └── config.py # Config & LLM setup
+│   ├── **init**.py
+│   ├── base.py              # Workflow base classes
+│   └── config.py            # Config & LLM setup
 ├── workflows/
-│ ├── init.py
-│ ├── web_scraping.py # Web scraping workflow
-│ └── database_analysis.py # Database workflow
+│   ├── **init**.py
+│   ├── web\_scraping.py      # Web scraping workflow
+│   └── database\_analysis.py # Database workflow
 ├── utils/
-│ ├── init.py
-│ ├── constants.py # Project constants
-│ ├── duckdb_utils.py # DuckDB helpers
-│ └── prompts.py # LLM prompts
+│   ├── **init**.py
+│   ├── constants.py         # Project constants
+│   ├── duckdb\_utils.py      # DuckDB helpers
+│   └── prompts.py           # LLM prompts
 ├── tests/
-│ └── test_api.py # API tests
-├── .env.example # Example env vars
+│   └── test\_api.py          # API tests
+├── .env.example             # Example env vars
 ├── .gitignore
-├── requirements.txt # Python deps
+├── requirements.txt         # Python dependencies
 └── README.md
 
-yaml
-Copy
-Edit
+````
 
 ---
 
-## ⚙ How It Works
+## ⚙️ How It Works
 
 ### 1. **Web Scraping Workflow** (`multi_step_web_scraping`)
 Triggered when a query contains a **URL**.
@@ -78,61 +82,81 @@ Triggered when the query references a **database** (e.g., S3 path).
 
 ## 🛠 Setup & Installation
 
-### Prerequisites
+### ✅ Prerequisites
+
 - Python 3.10+
 - Google Gemini API Key
 
-### 1. Clone the Repository
+---
+
+### 🔧 Step-by-Step Setup
+
+#### 1. Clone the Repository
+
 ```bash
 git clone <your-repository-url>
 cd "reshavs project"
-2. Create a Virtual Environment
-bash
-Copy
-Edit
+````
+
+#### 2. Create a Virtual Environment
+
+```bash
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
-3. Install Dependencies
-bash
-Copy
-Edit
+```
+
+#### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
-4. Configure Environment Variables
-Rename .env.example → .env and set your key:
+```
 
-env
-Copy
-Edit
+#### 4. Configure Environment Variables
+
+Rename `.env.example` → `.env` and set your key:
+
+```env
 GEMINI_API_KEY="your_actual_gemini_api_key_here"
-5. Install Playwright Browsers
-bash
-Copy
-Edit
+```
+
+#### 5. Install Playwright Browsers
+
+```bash
 playwright install
-▶ Running the Application
-bash
-Copy
-Edit
+```
+
+---
+
+### ▶️ Running the Application
+
+```bash
 uvicorn app.main:app --reload
-API will be available at:
-http://127.0.0.1:8000
+```
 
-📡 API Usage
-Endpoint
-bash
-Copy
-Edit
+App will be available at:
+📍 `http://127.0.0.1:8000`
+
+---
+
+## 📡 API Usage
+
+### 🔗 Endpoint
+
+```http
 POST /api/
-Form Data:
+```
 
-questions_txt → Path to .txt file containing your query.
+**Form Data:**
 
-Example — Web Scraping
-File: wiki_films_question.txt
+* `questions_txt` → Path to `.txt` file containing your query
 
-plaintext
-Copy
-Edit
+---
+
+### 📄 Example — Web Scraping
+
+**File**: `wiki_films_question.txt`
+
+```text
 Scrape the list of highest grossing films from Wikipedia...
 URL: https://en.wikipedia.org/wiki/List_of_highest-grossing_films
 
@@ -140,29 +164,33 @@ URL: https://en.wikipedia.org/wiki/List_of_highest-grossing_films
 2. Which is the earliest film that grossed over $1.5 bn?
 3. What's the correlation between Rank and Peak?
 4. Draw a scatterplot of Rank and Peak with a red dotted regression line.
-Run:
+```
 
-bash
-Copy
-Edit
+**Run:**
+
+```bash
 curl -X POST "http://127.0.0.1:8000/api/" \
      -F "questions_txt=@wiki_films_question.txt"
-Example — Database Analysis
-File: high_court_question.txt
+```
 
-plaintext
-Copy
-Edit
+---
+
+### 🗃️ Example — Database Analysis
+
+**File**: `high_court_question.txt`
+
+```text
 The Indian high court judgement dataset is located at:
 s3://indian-high-court-judgments/...
 
 Q1. Which high court disposed the most cases from 2019 - 2022?
 Q2. Regression slope of date_of_registration - decision_date by year for court=33_10?
 Q3. Scatterplot of year vs. delay days with regression line.
-Run:
+```
 
-bash
-Copy
-Edit
+**Run:**
+
+```bash
 curl -X POST "http://127.0.0.1:8000/api/" \
      -F "questions_txt=@high_court_question.txt"
+```
